@@ -1,0 +1,65 @@
+import math
+import matplotlib.pyplot as plt
+import numpy as np
+
+c1=3
+c2=2.5
+D=187.5
+K=20
+h=0.02
+L=2
+q=1000
+
+y = np.linspace(1, 1000, 1000)
+
+tcu1 = D*c1 + (K*D)/y + (h/2)*y  
+tcu2 = D*c2 + (K*D)/y + (h/2)*y
+
+
+
+ymin=math.sqrt(2*K*D/h)
+print("ymin is",ymin)
+
+tcu1_ymin = c1*D + (K*D)/ymin + (h*ymin)/2
+
+print("TCU1(ymin) is",tcu1_ymin)
+
+a=1
+c = 2*K*D/h
+b = (2*(c2*D - tcu1_ymin)/h)
+
+print("Quadratic Eqn is Q^2 +",b,"Q +",c)
+
+Q1 = (-b + math.sqrt(b*b - 4*a*c))/(2*a)
+Q2 = (-b - math.sqrt(b*b - 4*a*c))/(2*a)
+
+print("roots are",Q1,Q2)
+
+Q=Q1
+
+l = [q,ymin,Q]
+res1=[]
+for i in l:
+    res1.append(D*c1 + (K*D)/i + (h/2)*i)
+
+plt.plot(y,tcu1,"b-",label="y vs tcu1")
+plt.plot(y,tcu2,"-g",label="y vs tcu2")
+#
+#plt.plot(y,l,"o")
+plt.ylim(0,1000)
+plt.legend()
+plt.show()
+
+
+yopt=0
+
+#zone 1 and zone 3
+if q<ymin or q>Q:
+    yopt=ymin
+#zone 2
+else:
+    yopt=q
+
+reorder_pt = L*D
+
+print("optimal inventory policy is order",yopt,"gallons when inventory level drops to",reorder_pt,"gallons")
