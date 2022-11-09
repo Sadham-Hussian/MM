@@ -1,0 +1,16 @@
+arima.py
+arima1.py
+arma.py
+backward.py
+classicalEoq.py
+cubic.py
+dynamicEoqWithSetUpCost.py
+dynamicEoqWithoutSetUpCost.py
+eoqWithPriceBreak.py
+forward.py
+lagrange.py
+linreg.py
+mulreg.py
+newton.py
+portfolio.py
+timeseries.py
